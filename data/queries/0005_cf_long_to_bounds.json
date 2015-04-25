@@ -1,0 +1,6 @@
+{
+  "type":"long_to_bounds",
+  "time":172800000,
+  "input_cal_name":"codeforces.ics",
+  "output_cal_name":"cf_long_to_bounds.ics"
+}

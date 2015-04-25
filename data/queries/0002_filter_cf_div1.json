@@ -1,0 +1,6 @@
+{
+"type":"name_filter",
+"pattern":"^[\\s\\S]*Div\\. 1[\\s\\S]*$",
+"input_cal_name":"codeforces.ics",
+"output_cal_name":"cf_div1.ics"
+}

@@ -1,0 +1,5 @@
+{
+  "type":"get_from_url",
+  "url":"https://www.google.com/calendar/ical/appirio.com_bhga3musitat85mhdrng9035jg%40group.calendar.google.com/public/basic.ics",
+  "output_cal_name":"topcoder.ics"
+}

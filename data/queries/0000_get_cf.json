@@ -1,0 +1,5 @@
+{
+  "type":"get_from_url",
+  "url":"https://www.google.com/calendar/ical/br1o1n70iqgrrbc875vcehacjg%40group.calendar.google.com/public/basic.ics",
+  "output_cal_name":"codeforces.ics"
+}

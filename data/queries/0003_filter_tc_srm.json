@@ -1,0 +1,6 @@
+{
+  "type":"name_filter",
+  "pattern":"^[\\s\\S]*SRM[\\s\\S]*$",
+  "input_cal_name":"topcoder.ics",
+  "output_cal_name":"tc_srms.ics"
+}

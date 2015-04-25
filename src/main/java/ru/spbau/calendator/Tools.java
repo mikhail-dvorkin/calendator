@@ -21,13 +21,13 @@ public class Tools {
     public static void get_cal_from_url(String url_name, String output_name) throws Exception{
         URL url = new URL(url_name);
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-        FileOutputStream fos = new FileOutputStream("data/cals/" + output_name);
+        FileOutputStream fos = new FileOutputStream("data/ical/" + output_name);
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         fos.close();
     }
 
     public static Calendar read_calendar(String input_name) throws Exception {
-        FileInputStream fin = new FileInputStream("data/cals/" + input_name);
+        FileInputStream fin = new FileInputStream("data/ical/" + input_name);
         CalendarBuilder builder = new CalendarBuilder();
         Calendar cal = builder.build(fin);
         fin.close();
@@ -35,7 +35,7 @@ public class Tools {
     }
 
     public static void print_calendar(Calendar cal, String output_name) throws Exception {
-        FileOutputStream fout = new FileOutputStream("data/cals/" + output_name);
+        FileOutputStream fout = new FileOutputStream("data/ical/" + output_name);
         CalendarOutputter outputter = new CalendarOutputter();
         outputter.output(cal, fout);
         fout.close();
