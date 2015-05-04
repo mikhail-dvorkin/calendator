@@ -1,0 +1,5 @@
+{
+  "type":"process",
+  "path":"plugins.processors.default_processors.MergeProcessor",
+  "args":["topcoder.ics", "codeforces.ics"]
+}

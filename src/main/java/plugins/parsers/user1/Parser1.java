@@ -1,4 +1,4 @@
-package plugins.user1;
+package plugins.parsers.user1;
 
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Date;

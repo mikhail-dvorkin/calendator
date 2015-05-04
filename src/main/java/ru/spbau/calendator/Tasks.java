@@ -1,6 +1,7 @@
 package ru.spbau.calendator;
 
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -49,8 +50,13 @@ public class Tasks {
         if (type.equals("parse")) {
             Class cls = Class.forName((String) json.get("path"));
             Parser parser = (Parser) cls.newInstance();
-
             Tools.print_calendar(parser.parse(),
+                    out_cal_name);
+        }
+        if (type.equals("process")) {
+            Class cls = Class.forName((String) json.get("path"));
+            Processor processor = (Processor) cls.newInstance();
+            Tools.print_calendar(processor.process(((JSONArray) json.get("args")).toArray()),
                     out_cal_name);
         }
     }
