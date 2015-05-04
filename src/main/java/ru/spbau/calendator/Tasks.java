@@ -45,6 +45,14 @@ public class Tasks {
         if (type.equals("long_to_bounds"))
             Tools.print_calendar(Tools.long_events_to_bounds(Tools.read_calendar((String) json.get("input_cal_name")), (Long) json.get("time")),
                     out_cal_name);
+
+        if (type.equals("parse")) {
+            Class cls = Class.forName((String) json.get("path"));
+            Parser parser = (Parser) cls.newInstance();
+
+            Tools.print_calendar(parser.parse(),
+                    out_cal_name);
+        }
     }
 
 }

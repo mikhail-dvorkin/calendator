@@ -35,4 +35,4 @@ buildNumber.properties
 .mvn/timing.properties
 
 
-data/ical
+data/ical/
