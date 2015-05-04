@@ -34,5 +34,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-
 data/ical/
+log/
