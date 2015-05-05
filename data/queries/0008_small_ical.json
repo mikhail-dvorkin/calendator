@@ -1,0 +1,5 @@
+{
+  "type":"ical",
+  "properties":{"X-WR-CALDESC":"some_description"},
+  "events":[{"SUMMARY":"small_test_event", "DESCRIPTION":"some_description", "DTSTART":"20150505T163000Z", "DTEND":"20150505T183000Z"}, {"SUMMARY":"ptz", "DTSTART":"20150501T090000Z", "DURATION":"+P10D", "URL":"some_url"}]
+}

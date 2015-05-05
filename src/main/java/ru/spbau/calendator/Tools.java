@@ -3,10 +3,10 @@ package ru.spbau.calendator;
 
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.model.*;
 import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.Date;
-import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.*;
 
 import java.io.FileInputStream;
@@ -15,7 +15,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.UUID;
+import java.util.*;
 
 public class Tools {
     public static void get_cal_from_url(String url_name, String output_name) throws Exception{
@@ -111,6 +111,37 @@ public class Tools {
             } else
                 output_cal.getComponents().add(component);
         }
+
+        return output_cal;
+    }
+
+    public static Calendar make_simple_ical(Set keys, ArrayList<Set> events) throws Exception {
+        Calendar output_cal = new Calendar();
+        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
+        output_cal.getProperties().add(Version.VERSION_2_0);
+        output_cal.getProperties().add(CalScale.GREGORIAN);
+        for (Object o: keys) {
+            Map.Entry entry = (Map.Entry) o;
+            Property property = PropertyFactoryImpl.getInstance().createProperty((String) entry.getKey());
+            property.setValue((String) entry.getValue());
+            output_cal.getProperties().add(property);
+        }
+
+        for (Set s: events) {
+            VEvent event = new VEvent();
+            Uid uid = new Uid();
+            event.getProperties().add(uid);
+            event.getProperty("UID").setValue(UUID.randomUUID() + "@" + InetAddress.getLocalHost().getHostName());
+            for (Object o: s) {
+                Map.Entry entry = (Map.Entry) o;
+                Property property = PropertyFactoryImpl.getInstance().createProperty((String) entry.getKey());
+                property.setValue((String) entry.getValue());
+                event.getProperties().add(property);
+
+            }
+            output_cal.getComponents().add(event);
+        }
+
 
         return output_cal;
     }

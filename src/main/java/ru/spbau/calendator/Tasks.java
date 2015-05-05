@@ -7,6 +7,8 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Tasks {
     public static void run() throws Exception {
@@ -62,6 +64,14 @@ public class Tasks {
                 Class cls = Class.forName((String) json.get("path"));
                 Processor processor = (Processor) cls.newInstance();
                 Tools.print_calendar(processor.process(((JSONArray) json.get("args")).toArray()),
+                        out_cal_name);
+            }
+            if (type.equals("ical")) {
+                Object a[] = ((JSONArray) json.get("events")).toArray();
+                ArrayList<Set> arr = new ArrayList<Set>();
+                for (Object o: a)
+                    arr.add(((JSONObject) o).entrySet());
+                Tools.print_calendar(Tools.make_simple_ical(((JSONObject) json.get("properties")).entrySet(), arr),
                         out_cal_name);
             }
         } catch (Exception ex) {
