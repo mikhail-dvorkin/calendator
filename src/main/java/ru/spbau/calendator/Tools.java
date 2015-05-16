@@ -18,6 +18,14 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.*;
 
 public class Tools {
+    public static Calendar make_default_ical() throws Exception {
+        Calendar output_cal = new Calendar();
+        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
+        output_cal.getProperties().add(Version.VERSION_2_0);
+        output_cal.getProperties().add(CalScale.GREGORIAN);
+        return output_cal;
+    }
+
     public static void get_cal_from_url(String url_name, String output_name) throws Exception{
         URL url = new URL(url_name);
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
@@ -42,10 +50,7 @@ public class Tools {
     }
 
     public static Calendar filter_by_name(String p, Calendar input_cal) throws Exception {
-        Calendar output_cal = new Calendar();
-        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
-        output_cal.getProperties().add(Version.VERSION_2_0);
-        output_cal.getProperties().add(CalScale.GREGORIAN);
+        Calendar output_cal = make_default_ical();
 
         for (Object o : input_cal.getComponents()) {
             Component component = (Component) o;
@@ -61,10 +66,7 @@ public class Tools {
     }
 
     public static Calendar merge_cals(Calendar cal1, Calendar cal2) throws Exception {
-        Calendar output_cal = new Calendar();
-        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
-        output_cal.getProperties().add(Version.VERSION_2_0);
-        output_cal.getProperties().add(CalScale.GREGORIAN);
+        Calendar output_cal = make_default_ical();
 
         for (Object o : cal1.getComponents()) {
             Component component = (Component) o;
@@ -79,10 +81,7 @@ public class Tools {
     }
 
     public static Calendar long_events_to_bounds(Calendar input_cal, long time_in_seconds) throws Exception {
-        Calendar output_cal = new Calendar();
-        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
-        output_cal.getProperties().add(Version.VERSION_2_0);
-        output_cal.getProperties().add(CalScale.GREGORIAN);
+        Calendar output_cal = make_default_ical();
 
         for (Object o : input_cal.getComponents()) {
             Component component = (Component) o;
@@ -116,10 +115,7 @@ public class Tools {
     }
 
     public static Calendar make_simple_ical(Set keys, ArrayList<Set> events) throws Exception {
-        Calendar output_cal = new Calendar();
-        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
-        output_cal.getProperties().add(Version.VERSION_2_0);
-        output_cal.getProperties().add(CalScale.GREGORIAN);
+        Calendar output_cal = make_default_ical();
         for (Object o: keys) {
             Map.Entry entry = (Map.Entry) o;
             Property property = PropertyFactoryImpl.getInstance().createProperty((String) entry.getKey());

@@ -3,21 +3,17 @@ package plugins.parsers.user1;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.CalScale;
-import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Uid;
-import net.fortuna.ical4j.model.property.Version;
 import ru.spbau.calendator.Parser;
+import ru.spbau.calendator.Tools;
+
 import java.lang.Exception;
 import java.net.InetAddress;
 import java.util.UUID;
 
 public class Parser1 implements Parser {
     public Calendar parse() throws Exception {
-        Calendar output_cal = new Calendar();
-        output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
-        output_cal.getProperties().add(Version.VERSION_2_0);
-        output_cal.getProperties().add(CalScale.GREGORIAN);
+        Calendar output_cal = Tools.make_default_ical();
 
         VEvent event = new VEvent(new Date(), "test_event");
 
