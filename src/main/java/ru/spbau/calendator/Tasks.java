@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 
 public class Tasks {
@@ -17,6 +18,7 @@ public class Tasks {
         if (files == null) {
             Main.logger.warning("No json queries found");
         } else {
+            Arrays.sort(files);
             for (File file : files) {
                 JSONParser parser = new JSONParser();
                 FileReader reader = new FileReader(file);
