@@ -27,7 +27,7 @@ public class Tasks {
         }
     }
 
-    public static void make_cal_from_json(JSONObject json, String file_name) throws Exception {
+    public static void make_cal_from_json(JSONObject json, String file_name) {
         try {
             if (json.containsKey("disabled") && (Boolean) json.get("disabled")) {
                 return;
@@ -55,20 +55,20 @@ public class Tasks {
                         out_cal_name);
 
             if (type.equals("parse")) {
-                Class cls = Class.forName((String) json.get("path"));
+                Class<?> cls = Class.forName((String) json.get("path"));
                 Parser parser = (Parser) cls.newInstance();
                 Tools.print_calendar(parser.parse(),
                         out_cal_name);
             }
             if (type.equals("process")) {
-                Class cls = Class.forName((String) json.get("path"));
+                Class<?> cls = Class.forName((String) json.get("path"));
                 Processor processor = (Processor) cls.newInstance();
                 Tools.print_calendar(processor.process(((JSONArray) json.get("args")).toArray()),
                         out_cal_name);
             }
             if (type.equals("ical")) {
                 Object a[] = ((JSONArray) json.get("events")).toArray();
-                ArrayList<Set> arr = new ArrayList<Set>();
+                ArrayList<Set<?>> arr = new ArrayList<Set<?>>();
                 for (Object o: a)
                     arr.add(((JSONObject) o).entrySet());
                 Tools.print_calendar(Tools.make_simple_ical(((JSONObject) json.get("properties")).entrySet(), arr),

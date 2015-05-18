@@ -18,7 +18,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.*;
 
 public class Tools {
-    public static Calendar make_default_ical() throws Exception {
+    public static Calendar make_default_ical() {
         Calendar output_cal = new Calendar();
         output_cal.getProperties().add(new ProdId("-//Calendator//Calendar 1.0//EN"));
         output_cal.getProperties().add(Version.VERSION_2_0);
@@ -31,6 +31,7 @@ public class Tools {
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
         FileOutputStream fos = new FileOutputStream("data/ical/" + output_name);
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        rbc.close();
         fos.close();
     }
 
@@ -49,7 +50,7 @@ public class Tools {
         fout.close();
     }
 
-    public static Calendar filter_by_name(String p, Calendar input_cal) throws Exception {
+    public static Calendar filter_by_name(String p, Calendar input_cal) {
         Calendar output_cal = make_default_ical();
 
         for (Object o : input_cal.getComponents()) {
@@ -65,7 +66,7 @@ public class Tools {
         return output_cal;
     }
 
-    public static Calendar merge_cals(Calendar cal1, Calendar cal2) throws Exception {
+    public static Calendar merge_cals(Calendar cal1, Calendar cal2) {
         Calendar output_cal = make_default_ical();
 
         for (Object o : cal1.getComponents()) {
@@ -114,22 +115,24 @@ public class Tools {
         return output_cal;
     }
 
-    public static Calendar make_simple_ical(Set keys, ArrayList<Set> events) throws Exception {
+    public static Calendar make_simple_ical(Set<?> keys, ArrayList<Set<?>> events) throws Exception {
         Calendar output_cal = make_default_ical();
         for (Object o: keys) {
-            Map.Entry entry = (Map.Entry) o;
+            @SuppressWarnings("unchecked")
+			Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) o;
             Property property = PropertyFactoryImpl.getInstance().createProperty((String) entry.getKey());
             property.setValue((String) entry.getValue());
             output_cal.getProperties().add(property);
         }
 
-        for (Set s: events) {
+        for (Set<?> s: events) {
             VEvent event = new VEvent();
             Uid uid = new Uid();
             event.getProperties().add(uid);
             event.getProperty("UID").setValue(UUID.randomUUID() + "@" + InetAddress.getLocalHost().getHostName());
             for (Object o: s) {
-                Map.Entry entry = (Map.Entry) o;
+                @SuppressWarnings("unchecked")
+				Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) o;
                 Property property = PropertyFactoryImpl.getInstance().createProperty((String) entry.getKey());
                 property.setValue((String) entry.getValue());
                 event.getProperties().add(property);
