@@ -6,7 +6,8 @@ import ru.spbau.calendator.Processor;
 import ru.spbau.calendator.Tools;
 
 public class MergeProcessor implements Processor {
-    public Calendar process(Object[] args) throws Exception {
+    @Override
+	public Calendar process(Object[] args) throws Exception {
         Calendar cal1 = Tools.read_calendar((String) args[0]);
         Calendar cal2 = Tools.read_calendar((String) args[1]);
 

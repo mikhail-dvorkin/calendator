@@ -12,7 +12,8 @@ import java.net.InetAddress;
 import java.util.UUID;
 
 public class Parser1 implements Parser {
-    public Calendar parse() throws Exception {
+    @Override
+	public Calendar parse() throws Exception {
         Calendar output_cal = Tools.make_default_ical();
 
         VEvent event = new VEvent(new Date(), "test_event");
