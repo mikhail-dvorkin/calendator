@@ -34,5 +34,11 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+
+### Eclipse: export to jar
+build.xml
+jar-in-jar-loader.zip
+
+
 data/ical/
 log/
