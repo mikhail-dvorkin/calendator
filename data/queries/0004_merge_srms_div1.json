@@ -2,5 +2,5 @@
   "type":"merge",
   "cal1":"tc_srms.ics",
   "cal2":"cf_div1.ics",
-  "output_cal_name":"tc_srms&cf_div1.ics"
+  "output_cal_name":"tc_srms,cf_div1.ics"
 }
